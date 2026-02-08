@@ -41,6 +41,11 @@
 #define AMPLITUDE 16000
 
 // Macro to extract nibbles from opcode
+// Extracts a 4-bit nibble from a 16-bit opcode value
+// index 1 = most significant nibble (bits 12-15)
+// index 2 = second nibble (bits 8-11)
+// index 3 = third nibble (bits 4-7)
+// index 4 = least significant nibble (bits 0-3)
 #define GET_NIBBLE(value, index) (((value >> ((4 - index) * 4)) & 0x000F))
 
 // Audio data structure
@@ -110,7 +115,8 @@ void initialize_chip(CHIP8 *chip8) {
     chip8->pc = NULL;
     chip8->i = NULL;
     chip8->prg_stack.size = 0;
-    memset(chip8->prg_stack.data, 0, STACK_SIZE);
+    // Zero out all stack pointers (array of pointers, not bytes)
+    memset(chip8->prg_stack.data, 0, STACK_SIZE * sizeof(unsigned char *));
     
     chip8->d_timer = 0;
     chip8->audio_data.phase = 0.0f;
@@ -144,8 +150,10 @@ void load_font(CHIP8 *chip8) {
         0xF0, 0x80, 0xF0, 0x80, 0x80  // F
     };
     
-    for (int i = 0x50, sc = 0; i <= 0x9F; i++, sc++) {
-        chip8->memory[i] = sprites[sc];
+    // Copy font sprites to memory starting at 0x50
+    // sprite_index tracks position in sprites array
+    for (int i = 0x50, sprite_index = 0; i <= 0x9F; i++, sprite_index++) {
+        chip8->memory[i] = sprites[sprite_index];
     }
 }
 

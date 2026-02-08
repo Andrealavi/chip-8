@@ -23,7 +23,7 @@ F018    ; Set sound timer = V0
 
 ### Expected Behavior
 - Sound plays immediately when program starts
-- Beep lasts approximately 1 second (60/60 = 1.0 seconds)
+- Beep lasts approximately 1 second (60 timer ticks ÷ 60 Hz = 1.0 seconds)
 - Program continues running in infinite loop
 - No sound after timer expires
 
