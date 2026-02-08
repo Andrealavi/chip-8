@@ -1,0 +1,28 @@
+# Build artifacts
+chip8
+chip8.exe
+chip8_test
+
+# Object files
+*.o
+*.obj
+
+# Debugging files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test outputs
+test_output.txt

@@ -124,3 +124,54 @@ ROM Sources: You can find CHIP-8 ROMs at:
 
 - [CHIP-8 Archive](https://johnearnest.github.io/chip8Archive/)
 - [CHIP-8 Test Suite](https://github.com/Timendus/chip8-test-suite)
+
+## Testing
+
+This project includes a comprehensive test suite that verifies all CHIP-8 functionality.
+
+### Running Tests
+
+```bash
+make test
+```
+
+This will compile and run the test suite, which includes 79 tests covering:
+- Memory and initialization
+- Display operations
+- Flow control (jumps, calls, returns)
+- Conditional operations
+- Register operations (arithmetic, logic, bitwise)
+- Memory operations
+- Timer operations
+- Keyboard input
+- Audio system
+- Stack operations
+- Edge cases and boundary conditions
+
+### Test Results
+
+The test suite provides detailed output showing which tests pass or fail:
+
+```
+========================================
+Test Summary
+========================================
+Total tests:  79
+Passed:       79
+Failed:       0
+Success rate: 100.0%
+========================================
+```
+
+For detailed test documentation, see [TEST_DOCUMENTATION.md](TEST_DOCUMENTATION.md).
+
+### Building Tests Only
+
+To compile the test suite without running it:
+
+```bash
+make test-build
+./chip8_test
+```
+
+**Note**: The test suite does not require SDL2 and can be built and run independently of the main emulator.
