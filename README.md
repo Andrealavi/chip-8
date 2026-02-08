@@ -175,3 +175,27 @@ make test-build
 ```
 
 **Note**: The test suite does not require SDL2 and can be built and run independently of the main emulator.
+
+## Audio System
+
+The emulator includes full audio support according to the CHIP-8 specification:
+
+- **Tone Frequency**: 440Hz (A4 musical note)
+- **Sample Rate**: 44100Hz (CD quality)
+- **Activation**: Sound plays when sound timer > 0
+- **Timer Rate**: Decrements at 60Hz
+- **Instruction**: `FX18` - Set sound timer to value in VX
+
+### Testing Audio
+
+A simple test ROM is included to verify audio functionality:
+
+```bash
+./chip8 test_beep.ch8
+```
+
+This plays a 1-second beep at 440Hz.
+
+For detailed audio implementation documentation, see [AUDIO_DOCUMENTATION.md](AUDIO_DOCUMENTATION.md).
+
+For creating custom audio test programs, see [AUDIO_TEST_PROGRAMS.md](AUDIO_TEST_PROGRAMS.md).
