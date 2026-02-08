@@ -391,7 +391,8 @@ bool decex(CHIP8 *chip8, uint16_t opcode) {
                     
                 case 0x1E:
                     // Add Vx to I (FX1E)
-                    if ((uintptr_t)chip8->i > 0x1000 - chip8->reg[x]) {
+                    // Check if adding Vx to I would exceed memory bounds
+                    if ((uintptr_t)(chip8->i - chip8->memory) > MEM_SIZE - chip8->reg[x]) {
                         chip8->reg[0xF] = 1;
                     } else {
                         chip8->reg[0xF] = 0;
@@ -821,8 +822,9 @@ void test_audio_system() {
     // Test sound timer countdown behavior
     chip8.audio_data.timer_value = 5;
     for (int i = 5; i > 0; i--) {
-        test_assert(chip8.audio_data.timer_value == i, 
-                   "Sound timer countdown");
+        char msg[64];
+        snprintf(msg, sizeof(msg), "Sound timer countdown: value %d", i);
+        test_assert(chip8.audio_data.timer_value == i, msg);
         chip8.audio_data.timer_value--;
     }
     test_assert(chip8.audio_data.timer_value == 0, "Sound timer reaches 0");

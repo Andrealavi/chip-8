@@ -745,7 +745,8 @@ bool decex(CHIP8 *chip8, uint16_t opcode) {
                     // Add Vx to I (FX1E)
                     printf("F%X1E: Add V%X (0x%02X) to I (was 0x%03lX)",
                            x, x, chip8->reg[x], (uintptr_t)chip8->i - (uintptr_t)chip8->memory);
-                    if ((uintptr_t)chip8->i > 0x1000 - chip8->reg[x]) {
+                    // Check if adding Vx to I would exceed memory bounds
+                    if ((uintptr_t)(chip8->i - chip8->memory) > MEM_SIZE - chip8->reg[x]) {
                         chip8->reg[0xF] = 1;
                         printf(" - overflow detected, VF=1\n");
                     } else {

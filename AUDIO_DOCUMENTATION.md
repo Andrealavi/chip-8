@@ -215,12 +215,12 @@ Many CHIP-8 test ROMs include sound tests. They typically:
 
 ```assembly
 ; Simple CHIP-8 program to test audio
-6060  ; V0 = 96 (play sound for ~1.6 seconds)
+6060  ; V0 = 60 (play sound for ~1.0 seconds)
 F018  ; Set sound timer to V0
 1204  ; Jump to 0x204 (infinite loop)
 ```
 
-This program sets the sound timer to 96, which plays for approximately 1.6 seconds (96 / 60 = 1.6).
+This program sets the sound timer to 60, which plays for approximately 1.0 second (60 / 60 = 1.0).
 
 ## Performance Considerations
 
